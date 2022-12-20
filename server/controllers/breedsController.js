@@ -10,7 +10,10 @@ export const getAllBreeds = async (req, res) => {
 		})
 		.then((data) => {
 				data.map(element => {
-					allBreeds.push(element.name)
+					allBreeds.push({
+						name: element.name,
+						id: element.id,
+					})
 				});
 		})
 		.then(data => JSON.stringify(allBreeds));
