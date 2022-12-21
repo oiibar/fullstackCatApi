@@ -59,6 +59,7 @@ export const getOneBreedInfo = async (req, res) => {
 				oneBreedInfo = {
 					name: el.name,
 					description: el.description,
+					temperament: el.temperament,
 					origin: el.origin,
 					life_span: el.life_span,
 					adaptability: el.adaptability,
