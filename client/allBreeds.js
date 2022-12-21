@@ -9,9 +9,11 @@ const getAllBreeds = () => {
 getAllBreeds();
 
 const getOneBreed = (id) => {
-  fetch(`http://localhost:5000/api/breeds/${id}`)
-    .then((res) => res.json())
-    .then((data) => data)
+	return fetch(`http://localhost:5000/api/breeds/${id}`)
+		.then((res) => res.json())
+		.then((data) => {
+			return data;
+		})
 };
 
 const createOptions = async (allBreeds) => {
@@ -22,8 +24,21 @@ const createOptions = async (allBreeds) => {
     option.value = allBreeds[i].id;
 		select.appendChild(option);
   }
-	select.onchange = () => {
+	select.onchange = async () => {
 		const selectedElement = select.value;
-		console.log(getOneBreed(selectedElement))
+		const data = await getOneBreed(selectedElement);
+		console.log(data)
+		renderInfo(data);
 	}
 };
+
+const renderInfo = (data) => {
+	let info = document.getElementById('info');
+	info.innerHTML = `
+		<h2>${data.name}</h2>
+		<p>${data.description}</p>
+		<p>${data.temperament}</p>
+		<p>${data.life_span}</p>
+		<p>${data.origin}</p>
+	`;
+}
